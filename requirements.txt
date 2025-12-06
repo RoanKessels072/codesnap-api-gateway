@@ -1,0 +1,7 @@
+fastapi
+uvicorn
+pydantic
+pydantic-settings
+nats-py
+python-jose[cryptography]
+requests

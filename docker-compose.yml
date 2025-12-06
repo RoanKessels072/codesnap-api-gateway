@@ -1,0 +1,17 @@
+services:
+  api-gateway:
+    build: .
+    container_name: codesnap-api-gateway
+    env_file:
+      - .env
+    ports:
+      - "${PORT}:${PORT}"
+    networks:
+      default:
+        aliases:
+          - api-gateway
+
+networks:
+  default:
+    external: true
+    name: shared-codesnap-network
