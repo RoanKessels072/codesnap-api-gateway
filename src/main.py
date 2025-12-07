@@ -5,7 +5,8 @@ import uvicorn
 
 from src.config import settings
 from src.nats_client import nats_client
-from src.routers import users, exercises, attempts, ai
+from src.routers import users, exercises, attempts, ai, code_execution
+
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -30,6 +31,7 @@ app.include_router(users.router)
 app.include_router(exercises.router)
 app.include_router(attempts.router)
 app.include_router(ai.router)
+app.include_router(code_execution.router)
 
 @app.get("/health")
 async def health():
