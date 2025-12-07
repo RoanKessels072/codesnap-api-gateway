@@ -1,6 +1,8 @@
 services:
   api-gateway:
     build: .
+    volumes:
+      - ./src:/app/src
     container_name: codesnap-api-gateway
     env_file:
       - .env
