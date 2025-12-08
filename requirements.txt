@@ -5,3 +5,4 @@ pydantic-settings
 nats-py
 python-jose[cryptography]
 requests
+prometheus-client

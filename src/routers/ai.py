@@ -19,7 +19,7 @@ class RivalRequest(BaseModel):
     exercise_description: str
     difficulty: str
     language: str
-    starter_code: str
+    starter_code: Optional[str] = None
     function_name: str
     test_cases: list
 

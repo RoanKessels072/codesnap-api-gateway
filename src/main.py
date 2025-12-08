@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
 import uvicorn
+from prometheus_client import make_asgi_app
 
 from src.config import settings
 from src.nats_client import nats_client
@@ -17,6 +18,7 @@ async def lifespan(app: FastAPI):
     await nats_client.close()
 
 app = FastAPI(title="CodeSnap API Gateway", lifespan=lifespan)
+metrics_app = make_asgi_app()
 
 origins = settings.cors_origins.split(",")
 app.add_middleware(
@@ -26,6 +28,8 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+app.mount("/metrics", metrics_app)
 
 app.include_router(users.router)
 app.include_router(exercises.router)
