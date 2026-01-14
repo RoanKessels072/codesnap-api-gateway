@@ -58,6 +58,8 @@ async def submit_attempt(data: dict, user: dict = Depends(get_current_user)):
         
     return response
 
+
+
 @router.get("/my-history")
 async def get_my_attempts(user: dict = Depends(get_current_user)):
     user_resp = await nats_client.request("users.get", {"keycloak_id": user["keycloak_id"]})
@@ -74,7 +76,17 @@ async def get_best_attempts(user: dict = Depends(get_current_user)):
         
     response = await nats_client.request("attempts.best.all", {"user_id": user_resp["id"]})
     
+    
     if "error" in response:
         return {}
     
+    return response
+
+@router.get("/{attempt_id}")
+async def get_attempt(attempt_id: int, user: dict = Depends(get_current_user)):
+    response = await nats_client.request("attempts.get", {"id": attempt_id})
+    
+    if "error" in response:
+        raise HTTPException(status_code=404, detail=response["error"])
+        
     return response

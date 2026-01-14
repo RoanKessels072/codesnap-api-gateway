@@ -6,3 +6,4 @@ nats-py
 python-jose[cryptography]
 requests
 prometheus-client
+prometheus-fastapi-instrumentator
