@@ -15,7 +15,7 @@ async def get_exercise(exercise_id: int, user: dict = Depends(get_current_user))
         raise HTTPException(status_code=404, detail="Exercise not found")
     return response
 
-#Don't have an admin role yet, so this is not accessible
+#Don't have an admin role , so this is just proof of concept
 @router.post("/")
 async def create_exercise(data: dict, user: dict = Depends(get_current_user)):
     if "admin" not in user["roles"]:
