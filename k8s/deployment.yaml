@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-gateway
+  labels:
+    app: api-gateway
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api-gateway
+  template:
+    metadata:
+      labels:
+        app: api-gateway
+    spec:
+      containers:
+        - name: api-gateway
+          image: roankessels072/codesnap-api-gateway:latest # Ensure this matches your Docker Hub
+          imagePullPolicy: Never # Good for dev to ensure latest changes are pulled
+          ports:
+            - containerPort: 8000
+          env:
+            - name: PORT
+              value: "8000"
+            - name: NATS_URL
+              value: "nats://nats:4222" # connecting to the NATS service we defined earlier
+            - name: KEYCLOAK_URL
+              value: "http://keycloak:8080"
+          # Add other env vars from .env here
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
