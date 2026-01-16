@@ -2,7 +2,7 @@ from pydantic_settings import BaseSettings
 
 class Settings(BaseSettings):
     service_name: str = "api-gateway"
-    port: int = 5000
+    port: int = 8000
     
     nats_url: str = "nats://nats:4222" 
     

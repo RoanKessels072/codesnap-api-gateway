@@ -25,6 +25,13 @@ spec:
               value: "8000"
             - name: NATS_URL
               value: "nats://nats:4222" # connecting to the NATS service we defined earlier
+            - name: LOGFIRE_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: logfire-secrets
+                  key: write-token
+            - name: LOGFIRE_SERVICE_NAME
+              value: "api-gateway"
             - name: KEYCLOAK_URL
               value: "http://keycloak:8080"
           # Add other env vars from .env here

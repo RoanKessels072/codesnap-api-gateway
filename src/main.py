@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+import logfire
 
 from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
@@ -10,6 +11,8 @@ from src.nats_client import nats_client
 from src.routers import users, exercises, attempts, ai, code_execution
 
 
+logfire.configure()
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     print("Starting API Gateway...")
@@ -19,6 +22,7 @@ async def lifespan(app: FastAPI):
     await nats_client.close()
 
 app = FastAPI(title="CodeSnap API Gateway", lifespan=lifespan)
+logfire.instrument_fastapi(app)
 
 origins = settings.cors_origins.split(",")
 app.add_middleware(
