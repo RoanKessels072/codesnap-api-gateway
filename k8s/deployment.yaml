@@ -14,17 +14,22 @@ spec:
       labels:
         app: api-gateway
     spec:
+      imagePullSecrets:
+        - name: ecr-secret
       containers:
         - name: api-gateway
-          image: roankessels072/codesnap-api-gateway:latest # Ensure this matches your Docker Hub
-          imagePullPolicy: Never # Good for dev to ensure latest changes are pulled
+          image: 239861161036.dkr.ecr.eu-central-1.amazonaws.com/codesnap/api-gateway:v1
+
+          imagePullPolicy: Always
+
           ports:
             - containerPort: 8000
           env:
             - name: PORT
               value: "8000"
             - name: NATS_URL
-              value: "nats://nats:4222" # connecting to the NATS service we defined earlier
+              # 3. Use internal K8s DNS (standard for microservices)
+              value: "nats://nats:4222"
             - name: LOGFIRE_TOKEN
               valueFrom:
                 secretKeyRef:
@@ -33,12 +38,12 @@ spec:
             - name: LOGFIRE_SERVICE_NAME
               value: "api-gateway"
             - name: KEYCLOAK_URL
+              # 4. Use internal K8s DNS for Keycloak
               value: "http://keycloak:8080"
-          # Add other env vars from .env here
           resources:
             requests:
               cpu: "100m"
               memory: "128Mi"
             limits:
               cpu: "500m"
-              memory: "512Mi"
+              memory: "256Mi"
