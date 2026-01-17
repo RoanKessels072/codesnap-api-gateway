@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from src.nats_client import nats_client
 from src.auth import get_current_user
 
-router = APIRouter(prefix="/exercises", tags=["Exercises"])
+router = APIRouter(prefix="/api/exercises", tags=["Exercises"])
 
 @router.get("/")
 async def list_exercises(user: dict = Depends(get_current_user)):

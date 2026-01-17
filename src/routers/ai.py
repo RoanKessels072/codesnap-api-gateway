@@ -4,7 +4,7 @@ from typing import Optional
 from src.nats_client import nats_client
 from src.auth import get_current_user
 
-router = APIRouter(prefix="/ai", tags=["AI"])
+router = APIRouter(prefix="/api/ai", tags=["AI"])
 
 class FeedbackRequest(BaseModel):
     code: str

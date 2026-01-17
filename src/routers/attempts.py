@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from src.nats_client import nats_client
 from src.auth import get_current_user
 
-router = APIRouter(prefix="/attempts", tags=["Attempts"])
+router = APIRouter(prefix="/api/attempts", tags=["Attempts"])
 
 @router.post("/")
 async def submit_attempt(data: dict, user: dict = Depends(get_current_user)):

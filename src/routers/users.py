@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends
 from src.nats_client import nats_client
 from src.auth import get_current_user
 
-router = APIRouter(prefix="/users", tags=["Users"])
+router = APIRouter(prefix="/api/users", tags=["Users"])
 
 @router.get("/me")
 async def get_my_profile(user: dict = Depends(get_current_user)):

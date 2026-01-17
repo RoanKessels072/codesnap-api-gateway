@@ -4,7 +4,7 @@ from typing import Optional
 from src.nats_client import nats_client
 from src.auth import get_current_user
 
-router = APIRouter(prefix="/code", tags=["Code Execution"])
+router = APIRouter(prefix="/api/code", tags=["Code Execution"])
 
 class CodeExecutionRequest(BaseModel):
     code: str
