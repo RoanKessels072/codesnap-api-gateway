@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: api-gateway
-          image: roankessels/codesnap-api-gateway:eea93b9fc99c2a0592ac6d3bb6faa69eedb5630e
+          image: roankessels/codesnap-api-gateway:693977630cbeeb1fb1b23521466c55cef3c0fb92
 
           imagePullPolicy: Always
 
