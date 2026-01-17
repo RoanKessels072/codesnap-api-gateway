@@ -36,8 +36,8 @@ spec:
             - name: LOGFIRE_SERVICE_NAME
               value: "api-gateway"
             - name: KEYCLOAK_URL
-              # 4. Use internal K8s DNS for Keycloak
-              value: "http://keycloak:8080"
+              # Use internal K8s DNS for Keycloak (with /auth path for legacy Keycloak)
+              value: "http://keycloak:8080/auth"
           resources:
             requests:
               cpu: "100m"
